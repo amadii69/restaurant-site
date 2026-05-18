@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: restaurant-site
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: restaurant-site
+
+  template:
+    metadata:
+      labels:
+        app: restaurant-site
+
+    spec:
+      containers:
+      - name: restaurant-site
+        image: amadii/restaurant-site:v1
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 80

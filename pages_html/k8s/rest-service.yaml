@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: restaurant-service
+
+spec:
+  selector:
+    app: restaurant-site
+
+  ports:
+  - port: 80
+    targetPort: 80
+
+  type: NodePort
