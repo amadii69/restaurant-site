@@ -20,7 +20,7 @@ spec:
       containers:
       - name: restaurant-site
         image: amadii/restaurant-site:v1
-        imagePullPolicy: Always
+        imagePullPolicy: Never
 
         ports:
         - containerPort: 80
