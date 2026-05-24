@@ -3,6 +3,7 @@ kind: Deployment
 
 metadata:
   name: restaurant-site
+  namespace: restaurant
 
 spec:
   replicas: 2
