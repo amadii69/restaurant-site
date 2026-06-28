@@ -1,15 +1,15 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --cream:   #F5F0E8;
-  --warm:    #EDE4D3;
-  --gold:    #C8973A;
+  --cream:      #F5F0E8;
+  --warm:       #EDE4D3;
+  --gold:       #C8973A;
   --gold-light: #E8B86D;
-  --dark:    #1A1208;
-  --charcoal:#2E2416;
-  --muted:   #7A6E5F;
-  --serif:   'Cormorant Garamond', Georgia, serif;
-  --sans:    'DM Sans', sans-serif;
+  --dark:       #1A1208;
+  --charcoal:   #2E2416;
+  --muted:      #7A6E5F;
+  --serif:      'Cormorant Garamond', Georgia, serif;
+  --sans:       'D*,M Sans', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -37,16 +37,25 @@ nav {
   transition: padding 0.3s;
 }
 
+/* Logo — SVG + wordmark side by side */
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo svg { flex-shrink: 0; }
+
+.nav-logo-text {
   font-family: var(--serif);
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--dark);
-  text-decoration: none;
 }
 
-.nav-logo span { color: var(--gold); }
+.nav-logo-text span { color: var(--gold); }
 
 .nav-links {
   display: flex;
@@ -77,6 +86,30 @@ nav {
 
 .nav-links a:hover { color: var(--gold); }
 .nav-links a:hover::after { width: 100%; }
+
+/* Hamburger toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--dark);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ── HERO ── */
 #home {
@@ -164,6 +197,7 @@ nav {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.92) saturate(1.1);
+  background: var(--charcoal);
 }
 
 .hero-image-overlay {
@@ -270,6 +304,7 @@ nav {
   display: block;
   filter: saturate(1.05);
   transition: transform 0.4s;
+  background: var(--warm);
 }
 
 .card:hover .card-img { transform: scale(1.04); }
@@ -325,6 +360,7 @@ nav {
   cursor: pointer;
   background: transparent;
   transition: all 0.2s;
+  font-family: var(--sans);
 }
 
 .card-btn:hover {
@@ -364,6 +400,11 @@ nav {
 .about-text .section-label { color: var(--gold-light); }
 
 .about-text .section-title { color: var(--cream); margin-bottom: 1.5rem; }
+
+/* Gold italic em used in About heading */
+.gold-em {
+  color: var(--gold-light);
+}
 
 .about-text p {
   font-size: 0.95rem;
@@ -441,7 +482,6 @@ nav {
 }
 
 .map-embed {
-  border-radius: 0;
   overflow: hidden;
   height: 300px;
   margin-top: 2rem;
@@ -472,6 +512,15 @@ nav {
 }
 
 .hour-row span:first-child { font-weight: 400; color: var(--dark); }
+
+/* Replaces the old <br><br> spacers in the contact section */
+.reservation-note {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 42ch;
+  margin: 1.5rem 0 1.25rem;
+}
 
 /* ── FOOTER ── */
 footer {
@@ -529,8 +578,28 @@ footer .footer-logo span { color: var(--gold); }
   footer { flex-direction: column; gap: 0.6rem; text-align: center; padding: 1.5rem; }
 }
 
+@media (max-width: 680px) {
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(245,240,232,0.97);
+    backdrop-filter: blur(12px);
+    padding: 1rem 1.5rem 1.5rem;
+    border-top: 1px solid rgba(200,151,58,0.18);
+    gap: 1rem;
+  }
+
+  .nav-links.open { display: flex; }
+  nav { position: fixed; }
+}
+
 @media (max-width: 540px) {
-  .nav-links { display: none; }
   .hero-title { font-size: 2.6rem; }
   .btn-outline { margin-left: 0; margin-top: 0.8rem; }
   .hero-ctas { display: flex; flex-direction: column; align-items: flex-start; }

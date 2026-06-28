@@ -8,14 +8,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+
+
 </head>
 
 <body>
 
   <!-- NAV -->
   <nav>
-    <a href="#home" class="nav-logo">Al‑<span>Halal</span></a>
-    <ul class="nav-links">
+    <!-- LOGO -->
+    <a href="#home" class="nav-logo" aria-label="Al-Halal Restaurant home">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Crescent moon -->
+        <circle cx="18" cy="18" r="16" fill="#1a1a1a" stroke="#c9a84c" stroke-width="1.5"/>
+        <path d="M22 10a10 10 0 1 0 0 16 7 7 0 1 1 0-16z" fill="#c9a84c"/>
+        <!-- Star -->
+        <polygon points="25,11 25.6,12.8 27.5,12.8 26,13.9 26.6,15.7 25,14.6 23.4,15.7 24,13.9 22.5,12.8 24.4,12.8"
+                 fill="#c9a84c"/>
+      </svg>
+      <span class="nav-logo-text">Al‑<span>Halal</span></span>
+    </a>
+
+    <!-- Hamburger (mobile) -->
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#about">About</a></li>
@@ -42,8 +61,7 @@
     <div class="hero-image">
       <img
         src="african_dishes.jpg"
-        alt="Beautifully plated dishes at Al-Halal Restaurant"
-      />
+        alt="Beautifully plated dishes at Al-Halal Restaurant"/>
       <div class="hero-image-overlay"></div>
       <div class="hero-badge">
         <strong>100%</strong>
@@ -89,7 +107,7 @@
           <p>Fresh green bananas slow-cooked with smoked meat and seasonal vegetables.</p>
           <div class="card-footer">
             <span class="price">Rwf 2,000</span>
-            <button class="card-btn">Order</button>
+            <button class="card-btn" onclick="handleOrder('Matoke')">Order</button>
           </div>
         </div>
       </div>
@@ -98,15 +116,16 @@
         <div class="card-img-wrap">
           <img class="card-img"
             src="pilau.jpeg"
-            alt="Super Pilau" />
+            alt="Super Pilau"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&q=80'" />
         </div>
         <div class="card-body">
           <p class="card-tag">Chef's Special</p>
           <h3>Super Pilau</h3>
-          <p>Hearty pilau tossed with seasoned  meat and a rich tomato base.</p>
+          <p>Hearty pilau tossed with seasoned meat and a rich tomato base.</p>
           <div class="card-footer">
             <span class="price">Rwf 1,500</span>
-            <button class="card-btn">Order</button>
+            <button class="card-btn" onclick="handleOrder('Super Pilau')">Order</button>
           </div>
         </div>
       </div>
@@ -123,7 +142,7 @@
           <p>Creamy pasta with aged parmesan, fresh herbs, and a touch of garlic butter.</p>
           <div class="card-footer">
             <span class="price">Rwf 1,200</span>
-            <button class="card-btn">Order</button>
+            <button class="card-btn" onclick="handleOrder('Italian Pasta')">Order</button>
           </div>
         </div>
       </div>
@@ -132,7 +151,7 @@
         <div class="card-img-wrap">
           <img class="card-img"
             src="chapati.jpg"
-            alt="Chapati flatbread" />
+            alt="Chapati flatbread"/>
         </div>
         <div class="card-body">
           <p class="card-tag">Bread</p>
@@ -140,7 +159,7 @@
           <p>Golden round flatbread made fresh daily — perfect alongside any main course.</p>
           <div class="card-footer">
             <span class="price">Rwf 500</span>
-            <button class="card-btn">Order</button>
+            <button class="card-btn" onclick="handleOrder('Chapati')">Order</button>
           </div>
         </div>
       </div>
@@ -158,7 +177,7 @@
     </div>
     <div class="about-text">
       <p class="section-label">Our story</p>
-      <h2 class="section-title">Food made with<br><em style="font-style:italic;color:var(--gold-light)">heart & honesty</em></h2>
+      <h2 class="section-title">Food made with<br><em class="gold-em">heart &amp; honesty</em></h2>
       <p>
         Al-Halal Restaurant was founded on a simple belief: that food shared with loved ones should always be wholesome, delicious, and trustworthy.
       </p>
@@ -213,8 +232,9 @@
       </div>
 
       <div class="map-embed">
+        <!-- FIX: replaced Unicode minus (−) with regular hyphen (-) in bbox coordinates -->
         <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=30.05,−1.97,30.10,−1.93&layer=mapnik"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=30.05,-1.97,30.10,-1.93&layer=mapnik"
           title="Restaurant location map"
           loading="lazy"
         ></iframe>
@@ -236,11 +256,10 @@
         <div class="hour-row"><span>Holidays</span><span>By reservation</span></div>
       </div>
 
-      <br><br>
-      <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;max-width:42ch;">
+      <!-- FIX: replaced <br><br> spacers with a proper class -->
+      <p class="reservation-note">
         Reservations are recommended on weekends. Walk-ins are always welcome during the week — we'd love to see you.
       </p>
-      <br>
       <a href="mailto:hello@alhalal.rw" class="btn">Make a Reservation</a>
     </div>
   </section>
@@ -251,6 +270,51 @@
     <span>© 2026 Al-Halal Restaurant. All rights reserved.</span>
     <span>Kigali, Rwanda</span>
   </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close nav when a link is clicked (mobile)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Order button handler — scrolls to contact/reservation
+    function handleOrder(dish) {
+      const contact = document.getElementById('contact');
+      if (contact) {
+        contact.scrollIntoView({ behavior: 'smooth' });
+      }
+      // Optionally show a small toast
+      const toast = document.createElement('div');
+      toast.textContent = `"${dish}" added — complete your reservation below!`;
+      Object.assign(toast.style, {
+        position: 'fixed', bottom: '1.5rem', left: '50%',
+        transform: 'translateX(-50%)',
+        background: '#c9a84c', color: '#0e0e0e',
+        padding: '0.65rem 1.25rem', borderRadius: '6px',
+        fontFamily: 'DM Sans, sans-serif', fontSize: '0.9rem',
+        fontWeight: '500', zIndex: '9999',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+        transition: 'opacity 0.4s'
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; }, 2500);
+      setTimeout(() => toast.remove(), 3000);
+    }
+  </script>
 
 </body>
 </html>
